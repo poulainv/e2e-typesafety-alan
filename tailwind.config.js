@@ -1,0 +1,70 @@
+module.exports = {
+    theme: {
+        extend: {
+            fontFamily: {
+                display: ['Filson Pro'],
+                body: ['Filson Pro'],
+            },
+            colors: {
+                alan: {
+                    blue: '#2e94fa',
+                    green: '#22e39e',
+                    red: '#ff7045',
+                    indigo: '#5269d1',
+                    orange: '#fea134',
+                    yellow: '#fff256',
+                    pink: '#ffd4f0',
+                    cream: '#faedcf',
+                },
+                blue: {
+                    100: '#d9ecff',
+                    300: '#8bc2ff',
+                    500: '#2e94fa',
+                    700: '#176ec4',
+                    900: '#01478',
+                },
+                green: {
+                    100: '#dbfff2',
+                    300: '#7af0c5',
+                    500: '#22e39ea',
+                    700: '#11ae76',
+                    900: '#016642',
+                },
+                red: {
+                    100: '#fff0ed',
+                    300: '#ffa392',
+                    500: '$new-red',
+                    700: '#cc4228',
+                    900: '#9a220c',
+                },
+                orange: {
+                    100: '#fff5ec',
+                    300: '#ffc38d',
+                    500: '#fea134',
+                    700: '#e8771d',
+                    900: '#d55a01',
+                },
+                indigo: {
+                    100: '#eef0fb',
+                    300: '#9ba8e4',
+                    500: '#5269d1',
+                    700: '#304399',
+                    900: '#112065',
+                },
+                grey: {
+                    100: '#fafafa',
+                    200: '#f4f4f4',
+                    300: '#e5e4e4',
+                    400: '#d4d2d2',
+                    500: '#c3c2c2',
+                    600: '#a3a0a0',
+                    700: '#837f7f',
+                    800: '#595454',
+                    900: '#302929',
+                },
+            },
+        },
+        variants: {},
+        plugins: [],
+    },
+}
