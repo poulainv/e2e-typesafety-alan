@@ -1,0 +1,26 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator prisma_client {
+  provider = "prisma-client-js"
+}
+
+// 1. Add optional String emoji
+model CareEvent {
+  id       Int     @default(autoincrement()) @id
+  name     String
+  price    Float
+  emoji    String?
+  doctor   Doctor  @relation(fields: [doctorId], references: [id])
+  doctorId Int
+}
+
+// 2. Add Doctor model
+model Doctor {
+  id        Int         @default(autoincrement()) @id
+  firstName String
+  lastName  String
+  CareEvent CareEvent[]
+}
