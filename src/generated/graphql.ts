@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -10,74 +10,80 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  DateTime: any;
-  /** The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-  Json: any;
 };
 
 export type Query = {
   __typename?: 'Query';
-  hello?: Maybe<World>;
-  worlds?: Maybe<Array<World>>;
+  careEvents: Array<CareEvent>;
 };
 
-
-export type QueryHelloArgs = {
-  world?: Maybe<Scalars['String']>;
-};
-
-export type World = {
-  __typename?: 'World';
+export type Doctor = {
+  __typename?: 'Doctor';
   id: Scalars['Int'];
-  name: Scalars['String'];
-  count?: Maybe<Scalars['Float']>;
+  firstName: Scalars['String'];
 };
 
+export type CareEvent = {
+  __typename?: 'CareEvent';
+  id: Scalars['Int'];
+  emoji?: Maybe<Scalars['String']>;
+  doctor: Doctor;
+  name: Scalars['String'];
+  price: Scalars['Float'];
+};
+
+export type GetCareEventsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetWorldsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetWorldsQuery = (
+export type GetCareEventsQuery = (
   { __typename?: 'Query' }
-  & { worlds?: Maybe<Array<(
-    { __typename?: 'World' }
-    & Pick<World, 'id' | 'name'>
-  )>> }
+  & { careEvents: Array<(
+    { __typename?: 'CareEvent' }
+    & Pick<CareEvent, 'id' | 'name' | 'price' | 'emoji'>
+    & { doctor: (
+      { __typename?: 'Doctor' }
+      & Pick<Doctor, 'id' | 'firstName'>
+    ) }
+  )> }
 );
 
 
-export const GetWorldsDocument = gql`
-    query getWorlds {
-  worlds {
+export const GetCareEventsDocument = gql`
+    query getCareEvents {
+  careEvents {
     id
     name
+    price
+    emoji
+    doctor {
+      id
+      firstName
+    }
   }
 }
     `;
 
 /**
- * __useGetWorldsQuery__
+ * __useGetCareEventsQuery__
  *
- * To run a query within a React component, call `useGetWorldsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetWorldsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetCareEventsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCareEventsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetWorldsQuery({
+ * const { data, loading, error } = useGetCareEventsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetWorldsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetWorldsQuery, GetWorldsQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetWorldsQuery, GetWorldsQueryVariables>(GetWorldsDocument, baseOptions);
+export function useGetCareEventsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetCareEventsQuery, GetCareEventsQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetCareEventsQuery, GetCareEventsQueryVariables>(GetCareEventsDocument, baseOptions);
       }
-export function useGetWorldsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetWorldsQuery, GetWorldsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetWorldsQuery, GetWorldsQueryVariables>(GetWorldsDocument, baseOptions);
+export function useGetCareEventsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetCareEventsQuery, GetCareEventsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetCareEventsQuery, GetCareEventsQueryVariables>(GetCareEventsDocument, baseOptions);
         }
-export type GetWorldsQueryHookResult = ReturnType<typeof useGetWorldsQuery>;
-export type GetWorldsLazyQueryHookResult = ReturnType<typeof useGetWorldsLazyQuery>;
-export type GetWorldsQueryResult = ApolloReactCommon.QueryResult<GetWorldsQuery, GetWorldsQueryVariables>;
+export type GetCareEventsQueryHookResult = ReturnType<typeof useGetCareEventsQuery>;
+export type GetCareEventsLazyQueryHookResult = ReturnType<typeof useGetCareEventsLazyQuery>;
+export type GetCareEventsQueryResult = ApolloReactCommon.QueryResult<GetCareEventsQuery, GetCareEventsQueryVariables>;

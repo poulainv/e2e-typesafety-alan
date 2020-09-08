@@ -25,6 +25,5 @@ yarn-error.log*
 
 # tailwind
 /src/tailwind.css
-
-
+**/.vscode
 .now
